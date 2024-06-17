@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strictly Biz Barbershop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            max-width: 200px;
+            border-radius: 50%;
+            margin-bottom: 0.5em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            background-color: #333;
+            padding: 0.5em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1em;
+            font-size: 1.2em;
+        }
+        nav a.active {
+            border-bottom: 2px solid #fff;
+        }
+        section {
+            padding: 2em;
+            opacity: 0;
+            transition: opacity 1s;
+            background-color: #fff;
+            margin: 1em 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        section.visible {
+            opacity: 1;
+        }
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            width: 100%;
+            bottom: 0;
+        }
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .lightbox img {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .scroll-top {
+            display: none;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-info, .get-to-know-us {
+            margin-top: 2em;
+        }
+        .barber {
+            background-color: #f0f0f0;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .barber h3 {
+            margin-top: 0;
+        }
+        .barber p {
+            margin-bottom: 0;
+        }
+        .get-to-know-us h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://d2zdpiztbgorvt.cloudfront.net/us/images/31584/biz_photo_152510837663.jpeg?size=640x427" alt="Strictly Biz Barbershop Logo" class="logo">
+        <h1>Strictly Biz Barbershop</h1>
+        <p>Est. 2018</p>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#get-to-know-us">Get to Know Us</a>
+    </nav>
+    <section id="home" class="visible">
+        <h2>Welcome to Strictly Biz</h2>
+        <p>Discover the art of grooming and styling at our barbershop. We provide top-notch services to keep you looking your best.</p>
+    </section>
+    <section id="services" class="visible">
+        <h2>Our Services</h2>
+        <p>Explore our range of services, including haircuts, beard trims, and more. Our experienced barbers are dedicated to giving you a personalized and stylish look.</p>
+        <p> Our services include:
+            <ol>Haircut: $45</ol>
+            <ol>Haircut & Beard Trim: $60</ol>
+            <ol>Shave: $35</ol> 
+            <ol>Beard Trim: $20</ol>
+            <ol>Line Up: $15</ol>
+            <ol>Color: $50</ol>
+        </p>
+    </section>
+    <section id="gallery" class="visible">
+        <h2>Gallery</h2>
+        <p>Check out some of our satisfied customers and the fantastic work our barbers have done. We take pride in creating unique and trendy styles.</p>
+        <div class="carousel">
+            <img src="image1.png" class="active">
+            <img src="image2.png">
+            <img src="image3.png">
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+    </section>
+    <section id="get-to-know-us" class="visible">
+        <h2>Get to Know Us</h2>
+        <div class="get-to-know-us">
+            <div class="barber">
+                <h3>Nick</h3>
+                <p>Nick is the proud owner of Strictly Biz Barbershop. Hailing from Philly, Nick brings a blend of East Coast style and expertise to our shop. He is passionate about his craft and loves creating a welcoming environment for clients. When he's not at the shop, Nick enjoys spending time with his family, whom he cherishes dearly.</p>
+            </div>
+            <div class="barber">
+                <h3>Vu</h3>
+                <p>Vu, originally from Buffalo, is known for his precise cuts and friendly demeanor. A dedicated father of three girls, Vu balances his time between his family and his love for the Buffalo Bills. His attention to detail ensures every client leaves with a smile.</p>
+            </div>
+            <div class="barber">
+                <h3>Christian</h3>
+                <p>Christian is a Kansas City fan through and through. With a little girl and two dogs at home, he brings a sense of community and warmth to the shop. Christian’s ability to connect with clients and his skilled hands make him a favorite among our patrons.</p>
+            </div>
+            <div class="barber">
+                <h3>Jordan</h3>
+                <p>Jordan, a Denver/New England sports enthusiast, adds a unique flair to Strictly Biz. Married and a lover of comics, video games, and sports, Jordan’s diverse interests translate into creative and stylish cuts. His friendly personality ensures that clients feel at home.</p>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="visible">
+        <h2>Contact Us</h2>
+        <div class="contact-info">
+            <p>Phone: <a href="tel:7203897238">(720) 389-7238</a></p>
+            <p>Email: <a href="mailto:strictlybizbarbershop@gmail.com">strictlybizbarbershop@gmail.com</a></p>
+            <p>Booking: <a href="https://strictlybizbarbershop.booksy.com" target="_blank">Book an appointment online</a></p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Strictly Biz Barbershop. All rights reserved.</p>
+    </footer>
+    <div class="lightbox" id="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img">
+    </div>
+    <div class="scroll-top" id="scroll-top" onclick="scrollToTop()">Top</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll("nav a");
+            navLinks.forEach(link => {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute("href")).scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
+            });
+
+            // Lightbox functionality
+            const carouselImages = document.querySelectorAll(".carousel img");
+            const lightbox = document.getElementById("lightbox");
+            const lightboxImg = document.getElementById("lightbox-img");
+            carouselImages.forEach(img => {
+                img.addEventListener("click", function() {
+                    lightbox.style.display = "block";
+                    lightboxImg.src = this.src;
+                });
+            });
+
+            // Close lightbox
+            window.closeLightbox = function() {
+                lightbox.style.display = "none";
+            }
+
+            // Close lightbox on outside click
+            window.onclick = function(event) {
+                if (event.target == lightbox) {
+                    lightbox.style.display = "none";
+                }
+            }
+
+            // Scroll-to-top button functionality
+            const scrollTopBtn = document.getElementById("scroll-top");
+            window.addEventListener("scroll", function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.style.display = "block";
+                } else {
+                    scrollTopBtn.style.display = "none";
+                }
+            });
+
+            // Scroll-to-top function
+            window.scrollToTop = function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            // Carousel functionality
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('.carousel img');
+            const showSlides = (n) => {
+                slides.forEach((slide, index) => {
+                    slide.style.display = 'none';
+                    if (index === n) {
+                        slide.style.display = 'block';
+                    }
+                });
+            };
+            const plusSlides = (n) => {
+                slideIndex += n;
+                if (slideIndex >= slides.length) {
+                    slideIndex = 0;
+                }
+                if (slideIndex < 0) {
+                    slideIndex = slides.length - 1;
+                }
+                showSlides(slideIndex);
+            };
+            const autoSlides = () => {
+                plusSlides(1);
+                setTimeout(autoSlides, 3000); // Change image every 3 seconds
+            };
+            showSlides(slideIndex);
+            autoSlides();
+
+            // Fade-in sections on scroll
+            const sections = document.querySelectorAll("section");
+            const options = {
+                threshold: 0.5
+            };
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                });
+            }, options);
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Highlight active section in nav bar
+            const sectionsMap = {};
+            sections.forEach(section => {
+                sectionsMap[section.id] = section.offsetTop;
+            });
+
+            window.addEventListener("scroll", function() {
+                const scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                for (let id in sectionsMap) {
+                    if (sectionsMap[id] <= scrollPosition + 100) {
+                        document.querySelector("nav a.active").classList.remove("active");
+                        document.querySelector(`nav a[href*=${id}]`).classList.add("active");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
